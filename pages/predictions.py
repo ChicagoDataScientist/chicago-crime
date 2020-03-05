@@ -34,10 +34,28 @@ column1 = dbc.Col(
         
             ## Predictions
 
-            Your instructions: How to use your app to get new predictions.
+      
 
             """
         ),
+                dcc.Markdown(
+            """
+    
+
+            Select Date to predict
+
+
+
+            
+            """
+        ),
+            dcc.DatePickerSingle(
+                id='date-picker-single',
+                date=dt(2020, 3, 10),
+                with_portal=True
+            ),
+            html.Br(),
+        html.Br(),
         dcc.Markdown(
             """
     
@@ -50,7 +68,7 @@ column1 = dbc.Col(
             """
             
         ),
-        html.Br(),
+        # html.Br(),
         dcc.Markdown(
             """
     
@@ -154,23 +172,8 @@ column1 = dbc.Col(
 
 
 
-                dcc.Markdown(
-            """
-    
 
-            Select Date to predict
-
-
-
-            
-            """
-        ),
-            dcc.DatePickerSingle(
-                id='date-picker-single',
-                date=dt(2020, 3, 10)
-            ),
-            html.Br(),
-            html.Br(),
+            # html.Br(),
 
 
 # app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -186,72 +189,72 @@ column1 = dbc.Col(
 # ])
 
 
-        dcc.Markdown(
-            """
+        # dcc.Markdown(
+        #     """
     
 
-            Select month 1-12
+        #     Select month 1-12
             
 
 
 
-            """
-            ),
-            html.Br(),
-            daq.Slider(
-                id='Month',
-                min=1,
-                max=12,
-                value=7,
-                size=250,
-                handleLabel={"showCurrentValue": True,"label": "Month"},
-                step=1
-            ),
-            html.Br(),
-                dcc.Markdown(
-            """
+        #     """
+        #     ),
+        #     html.Br(),
+        #     daq.Slider(
+        #         id='Month',
+        #         min=1,
+        #         max=12,
+        #         value=7,
+        #         size=250,
+        #         handleLabel={"showCurrentValue": True,"label": "Month"},
+        #         step=1
+        #     ),
+        #     html.Br(),
+        #         dcc.Markdown(
+        #     """
     
 
-            Select day of month
+        #     Select day of month
             
 
 
 
-            """
-            ),
-            html.Br(),
-            daq.Slider(
-                id='Day',
-                min=1,
-                max=31,
-                value=29,
-                size=250,
-                handleLabel={"showCurrentValue": True,"label": "Day"},
-                step=1
-            ),
-            html.Br(),
-                        dcc.Markdown(
-            """
+        #     """
+        #     ),
+        #     html.Br(),
+        #     daq.Slider(
+        #         id='Day',
+        #         min=1,
+        #         max=31,
+        #         value=29,
+        #         size=250,
+        #         handleLabel={"showCurrentValue": True,"label": "Day"},
+        #         step=1
+        #     ),
+        #     html.Br(),
+        #                 dcc.Markdown(
+        #     """
     
 
-            Select day of week 1-7
+        #     Select day of week 1-7
             
 
 
 
-            """
-            ),
-            html.Br(),
-            daq.Slider(
-                id='Weekday',
-                min=1,
-                max=7,
-                value=1,
-                size=250,
-                handleLabel={"showCurrentValue": True,"label": "Weekday"},
-                step=1
-            ),
-            html.Br(),
+        #     """
+        #     ),
+        #     html.Br(),
+        #     daq.Slider(
+        #         id='Weekday',
+        #         min=1,
+        #         max=7,
+        #         value=1,
+        #         size=250,
+        #         handleLabel={"showCurrentValue": True,"label": "Weekday"},
+        #         step=1
+        #     ),
+        #     html.Br(),
    
         dcc.Markdown(
             """
@@ -268,7 +271,7 @@ column1 = dbc.Col(
             daq.Slider(
                 id='DailyAverageDryBulbTemperature',
                 min=-10,
-                max=110,
+                max=90,
                 value=78,
                 size=250,
                 handleLabel={"showCurrentValue": True,"label": "Temperature"},
@@ -292,7 +295,7 @@ column1 = dbc.Col(
             daq.Slider(
                 id='DailyAverageWindSpeed',
                 min=0,
-                max=60,
+                max=30,
                 value=8,
                 size=250,
                 handleLabel={"showCurrentValue": True,"label": "Windspeed"},
@@ -316,11 +319,11 @@ column1 = dbc.Col(
             daq.Slider(
                 id='DailyPrecipitation',
                 min=0,
-                max=10,
+                max=5,
                 value=0,
                 size=250,
                 handleLabel={"showCurrentValue": True,"label": "Precipitation"},
-                step=.5
+                step=.1
             ), 
             html.Br(),
                     dcc.Markdown(
@@ -360,9 +363,7 @@ column2 = dbc.Col(
             """
     
 
-            this moves things down
-
-            yes it does  
+           
 
 
 
@@ -376,14 +377,14 @@ column2 = dbc.Col(
 
         html.Br(),
 
-    html.Div(id='prediction-label', className='lead', style={'fontWeight': 'bold', 'fontSize': '1px', 'position': 'relative', 'left': '180px', 'bottom': '82px'})
+    html.Div(id='prediction-label', className='lead mt-5', style={'fontWeight': 'bold', 'fontSize': '1px', 'position': 'relative', 'left': '180px', 'bottom': '82px'})
         
     ]
 )
 
 layout = dbc.Row([column1, column2])
 @app.callback(
-    Output('prediction-content', 'children'),
+    Output('prediction-label', 'children'),
     [Input('Community_Area', 'value'),
     Input('DailyAverageDryBulbTemperature', 'value'),
     Input('DailyAverageWindSpeed', 'value'),
