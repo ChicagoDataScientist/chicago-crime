@@ -4,13 +4,17 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
 
 [packages]
 dash = "*"
 dash-bootstrap-components = "*"
 gunicorn = "*"
 plotly = "*"
-pandas = "*"
+pandas = "==0.25.3"
+dash-daq = "*"
+joblib = "==0.14.1"
+scikit-learn = "==0.22.1"
 
 [requires]
 python_version = "3"
