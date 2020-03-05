@@ -382,28 +382,30 @@ column2 = dbc.Col(
 )
 
 layout = dbc.Row([column1, column2])
-
 @app.callback(
-    Output('prediction-label', 'children'),
-    
-    # Output('prediction-content', 'children'),
+    Output('prediction-content', 'children'),
     [Input('Community_Area', 'value'),
     Input('DailyAverageDryBulbTemperature', 'value'),
     Input('DailyAverageWindSpeed', 'value'),
     Input('DailyPrecipitation', 'value'),
     Input('DailySnowDepth', 'value'),
-    Input('Month', 'value'),
-    Input('Day', 'value'),
-    Input('Weekday', 'value')],
+    Input('date-picker-single', 'date')],
 )
 def predict (Community_Area,
              DailyAverageDryBulbTemperature,
              DailyAverageWindSpeed,
              DailyPrecipitation,
              DailySnowDepth,
-             Month,
-             Day,
-             Weekday):
+             date_picked):
+    # Convert the date from a string to a Timestamp
+    assert type(date_picked) == str
+    date_picked = pd.to_datetime(date_picked)
+    assert type(date_picked) == pd.Timestamp
+    # Extract the month, day, weekday
+    Month = date_picked.month
+    Day = date_picked.day
+    Weekday = date_picked.dayofweek
+    # Construct a dateframe with all features
     df=pd.DataFrame(
         columns = ['Community_Area',
                    'DailyAverageDryBulbTemperature',
@@ -422,6 +424,46 @@ def predict (Community_Area,
         Day,
         Weekday]]
     )
+# original callback    
+# @app.callback(
+#     Output('prediction-label', 'children'),
+    
+#     # Output('prediction-content', 'children'),
+#     [Input('Community_Area', 'value'),
+#     Input('DailyAverageDryBulbTemperature', 'value'),
+#     Input('DailyAverageWindSpeed', 'value'),
+#     Input('DailyPrecipitation', 'value'),
+#     Input('DailySnowDepth', 'value'),
+#     Input('Month', 'value'),
+#     Input('Day', 'value'),
+#     Input('Weekday', 'value')],
+# )
+# def predict (Community_Area,
+#              DailyAverageDryBulbTemperature,
+#              DailyAverageWindSpeed,
+#              DailyPrecipitation,
+#              DailySnowDepth,
+#              Month,
+#              Day,
+#              Weekday):
+#     df=pd.DataFrame(
+#         columns = ['Community_Area',
+#                    'DailyAverageDryBulbTemperature',
+#                    'DailyAverageWindSpeed',
+#                    'DailyPrecipitation',
+#                    'DailySnowDepth',
+#                    'Month',
+#                    'Day',
+#                    'Weekday'],
+#         data =[[Community_Area,
+#         DailyAverageDryBulbTemperature,
+#         DailyAverageWindSpeed,
+#         DailyPrecipitation,
+#         DailySnowDepth,
+#         Month,
+#         Day,
+#         Weekday]]
+#     )
     y_pred = pipeline.predict(df)[0]
 
     output1 = f'{y_pred:.0f}'
