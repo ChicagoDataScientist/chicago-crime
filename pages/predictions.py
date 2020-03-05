@@ -52,6 +52,8 @@ column1 = dbc.Col(
             dcc.DatePickerSingle(
                 id='date-picker-single',
                 date=dt(2020, 3, 10),
+                min_date_allowed=dt(2020, 3, 5),
+                max_date_allowed=dt(2030, 1, 19),
                 with_portal=True
             ),
             html.Br(),
