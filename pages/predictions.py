@@ -273,7 +273,7 @@ column1 = dbc.Col(
             daq.Slider(
                 id='DailyAverageDryBulbTemperature',
                 min=-10,
-                max=90,
+                max=100,
                 value=78,
                 size=250,
                 handleLabel={"showCurrentValue": True,"label": "Temperature"},

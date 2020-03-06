@@ -16,7 +16,7 @@ column1 = dbc.Col(
             """
         
             ## Insights
-
+            Get more insights from my blog at http://bit.ly/predict-chicago-crime
 
             """
         ),

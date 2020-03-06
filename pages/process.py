@@ -16,7 +16,7 @@ column1 = dbc.Col(
             """
         
             ## Process
-
+            Learn more about my Process by reading this blogh post: http://bit.ly/predict-chicago-crime
 
             """
         ),

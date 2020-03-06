@@ -5,7 +5,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.express as px
+import dash
+app = dash.Dash(__name__)
 
+app.layout = html.Div(html.Img(src=app.get_asset_url('skyline.jpg')))
 # Imports from this application
 from app import app
 
@@ -18,15 +21,11 @@ column1 = dbc.Col(
         
             ## Predict crime in Chicago based on weather and date
 
-            Emphasize how the app will benefit users. Don't emphasize the underlying technology.
 
-            ✅ RUN is a running app that adapts to your fitness levels and designs personalized workouts to help you improve your running.
-
-            ❌ RUN is the only intelligent running app that uses sophisticated deep neural net machine learning to make your run smarter because we believe in ML driven workouts.
 
             """
         ),
-        dcc.Link(dbc.Button('Predict Crime', color='primary'), href='/predictions')
+        # dcc.Link(dbc.Button('Predict Crime', color='primary'), href='/predictions')
     ],
     md=4,
 )
@@ -37,8 +36,22 @@ fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size
 
 column2 = dbc.Col(
     [
-        dcc.Graph(figure=fig),
-    ]
+        dcc.Markdown(
+            """
+        
+
+
+            Are you traveling to a neighborhood in Chicago and want to know how many street crimes will be committed that day?
+
+            ✅ Our advanced machine learning algorithm will tell you which days are good and which days are bad
+
+            On average, this app can predict within 1.5 crimes, how many street crimes will occur in a given community on a given day.
+
+            """
+        ),
+        dcc.Link(dbc.Button('Predict Crime', color='primary'), href='/predictions')
+    ],
+    md=4,
 )
 
 layout = dbc.Row([column1, column2])
